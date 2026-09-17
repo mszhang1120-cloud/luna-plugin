@@ -9,6 +9,36 @@
             "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/tdd-guard.sh"
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'input=$(cat); echo \"$input\" | grep -qE \"\\\\$CLAUDE_TOOL_INPUT.*(rm[[:space:]]+-rf|git[[:space:]]+push[[:space:]]+--force|git[[:space:]]+reset[[:space:]]+--hard|DROP[[:space:]]+TABLE)\" && { echo \"BLOCKED: 위험한 명령어가 감지되었습니다\" >&2; exit 1; }; exit 0'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'input=$(cat); echo \"$(date \"+%F %T\") | $input\" >> \"$CLAUDE_PROJECT_DIR/.claude/audit.log\"' || true"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'if [ -f \"$CLAUDE_PROJECT_DIR/scripts/token-report.js\" ]; then node \"$CLAUDE_PROJECT_DIR/scripts/token-report.js\" \"$CLAUDE_PROJECT_DIR/.claude\" 2>/dev/null | tail -2; fi' || true"
+          }
+        ]
       }
     ]
   }
