@@ -13,12 +13,13 @@ function parseJSONL(filePath) {
   for (const line of lines) {
     try {
       const data = JSON.parse(line);
-      if (data.usage) {
+      const u = data.message && data.message.usage;
+      if (u) {
         usage.push({
-          input: data.usage.input_tokens || 0,
-          output: data.usage.output_tokens || 0,
-          cache_write: data.usage.cache_creation_input_tokens || 0,
-          cache_read: data.usage.cache_read_input_tokens || 0
+          input: u.input_tokens || 0,
+          output: u.output_tokens || 0,
+          cache_write: u.cache_creation_input_tokens || 0,
+          cache_read: u.cache_read_input_tokens || 0
         });
       }
     } catch {
@@ -73,10 +74,15 @@ function main() {
     : 0;
   const outputInputRatio = totalInput > 0 ? (totalOutput / totalInput).toFixed(2) : 'N/A';
 
-  console.log(`파일: ${path.basename(latestFile)}`);
-  console.log(`Turns: ${usage.length} | Input: ${totalInput} | Output: ${totalOutput} | Cache Write: ${totalCacheWrite} | Cache Read: ${totalCacheRead} | 캐시 히트율: ${cacheHitRate}%`);
-  if (skipped > 0) console.log(`건너뛴 줄: ${skipped}`);
-  console.log(`총합: Input ${totalInput} + Output ${totalOutput} = ${totalInput + totalOutput} | 출력:입력 비율 ${outputInputRatio}`);
+  const report = [
+    `파일: ${path.basename(latestFile)}`,
+    `Turns: ${usage.length} | Input: ${totalInput} | Output: ${totalOutput} | Cache Write: ${totalCacheWrite} | Cache Read: ${totalCacheRead} | 캐시 히트율: ${cacheHitRate}%`,
+    skipped > 0 ? `건너뛴 줄: ${skipped}` : null,
+    `총합: Input ${totalInput} + Output ${totalOutput} = ${totalInput + totalOutput} | 출력:입력 비율 ${outputInputRatio}`
+  ].filter(Boolean).join('\n');
+
+  // Stop hook에서는 순수 텍스트로 출력해야 Claude가 볼 수 있음
+  console.log(report);
 }
 
 main();
