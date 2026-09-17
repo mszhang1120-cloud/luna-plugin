@@ -1,0 +1,14 @@
+{
+  "name": "luna-plugin",
+  "version": "0.1.0",
+  "description": "LUNA Lab vibe coding seminar plugin toolkit",
+  "scripts": {
+    "test": "echo \"no tests yet\" && exit 0",
+    "lint": "echo \"no lint yet\" && exit 0",
+    "build": "echo \"no build yet\" && exit 0",
+    "grade": "node .claude/skills/repo-grade/grade.js"
+  },
+  "keywords": ["claude", "plugin", "vibe-coding"],
+  "author": "LUNA Lab",
+  "license": "MIT"
+}
