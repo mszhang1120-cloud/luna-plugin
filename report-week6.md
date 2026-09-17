@@ -10,6 +10,7 @@
 - **증거**: `repo-grade` 스킬 + `grade.js` 제작, **47점 → 67점** 향상 (package.json 추가 후)
 - **ROI 1위**: Tribal Knowledge (5/20) — `_brain/` 부재, 2위: Verification Gates (0→15/15) — test/lint/build 스크립트 추가로 해결
 - **관찰**: "점수 자체가 목적인 게 아니라, 병목(ROI 상위 1-2개)을 찾아 고치는 루프가 핵심이다"
+- **증거 스크린샷**: ![repo-grade 67/100](screenshot.png)
 
 ### LAB 06 — TDD 가드 훅
 - **증거**: `.claude/hooks/tdd-guard.sh` + `settings.json` PreToolUse[Edit|Write] 등록
