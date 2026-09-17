@@ -1,0 +1,12 @@
+{
+  "marketplace": "luna",
+  "plugins": [
+    {
+      "id": "luna-toolkit",
+      "name": "luna-toolkit",
+      "version": "0.2.0",
+      "source": "https://github.com/mszhang1120-cloud/luna-plugin",
+      "path": "luna-toolkit"
+    }
+  ]
+}

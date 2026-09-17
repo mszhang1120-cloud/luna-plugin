@@ -1,0 +1,14 @@
+{
+  "name": "luna-toolkit",
+  "version": "0.2.0",
+  "description": "LUNA Lab 바이브 코딩 세미나 자산 팩토리 — 헌법·채점·브레인·플러그인·TDD·SDD·토큰·리뷰·가드레일·온콜",
+  "author": "LUNA Lab",
+  "repository": "https://github.com/mszhang1120-cloud/luna-plugin",
+  "keywords": ["claude", "plugin", "vibe-coding", "hooks", "skills", "commands"],
+  "structure": {
+    "commands": "commands/",
+    "skills": "skills/",
+    "hooks": "hooks.json",
+    "scripts": "scripts/"
+  }
+}
